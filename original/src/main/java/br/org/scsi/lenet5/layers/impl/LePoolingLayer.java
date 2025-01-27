@@ -5,7 +5,7 @@ import java.util.List;
 import br.org.scsi.lenet5.data.FloatMatrix;
 import br.org.scsi.lenet5.layers.AbstractPoolingLayer;
 
-public class LePoolingLayer extends AbstractPoolingLayer {
+public class LePoolingLayer extends AbstractPoolingLayer<FloatMatrix> {
 
 	public LePoolingLayer(int windowSize, int stride) {
 		super(windowSize, stride);

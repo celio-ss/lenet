@@ -3,10 +3,10 @@ package br.org.scsi.lenet5.layers;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.org.scsi.lenet5.data.FloatMatrix;
+import br.org.scsi.lenet5.data.IMatrix;
 
 //Camada de Convolução (C1, C3, C5)
-public abstract class AbstractConvolutionLayer<T extends FloatMatrix> {
+public abstract class AbstractConvolutionLayer<T extends IMatrix<T>> {
 
 	protected final List<List<T>> filters; // Pode ser uma lista de filtros (C1) ou uma lista de listas de
 											// filtros (C3)

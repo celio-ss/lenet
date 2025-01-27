@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import br.org.scsi.lenet5.data.FloatMatrix;
+import br.org.scsi.lenet5.data.IMatrix;
 import br.org.scsi.lenet5.layers.AbstractPoolingLayer;
 import br.org.scsi.lenet5.layers.impl.LeC1ConvolutionLayer;
 import br.org.scsi.lenet5.layers.impl.LeC3ConvolutionLayer;
@@ -19,9 +20,9 @@ public class LeNetFive {
 	private final int height; // Altura das imagens de entrada
 
 	private final LeC1ConvolutionLayer c1Layer;
-	private final AbstractPoolingLayer s2Layer;
+	private final AbstractPoolingLayer<FloatMatrix> s2Layer;
 	private final LeC3ConvolutionLayer c3Layer;
-	private final AbstractPoolingLayer s4Layer;
+	private final AbstractPoolingLayer<FloatMatrix> s4Layer;
 	private final LeC5ConvolutionLayer c5Layer;
 
 	public LeNetFive(List<FloatMatrix> train) {

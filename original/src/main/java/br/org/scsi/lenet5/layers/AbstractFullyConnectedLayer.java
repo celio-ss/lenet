@@ -1,5 +1,7 @@
 package br.org.scsi.lenet5.layers;
 
-public class AbstractFullyConnectedLayer {
+import br.org.scsi.lenet5.data.IMatrix;
+
+public class AbstractFullyConnectedLayer<T extends IMatrix<T>> {
 
 }

@@ -3,6 +3,7 @@ package br.org.scsi.lenet5.layers.impl;
 import java.util.Collections;
 
 import br.org.scsi.lenet5.data.FloatMatrix;
+import br.org.scsi.lenet5.data.IMatrix;
 import br.org.scsi.lenet5.layers.AbstractConvolutionLayer;
 
 public class LeC1ConvolutionLayer extends AbstractConvolutionLayer<FloatMatrix> {
