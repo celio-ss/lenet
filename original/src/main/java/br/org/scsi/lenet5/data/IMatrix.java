@@ -1,7 +1,6 @@
 package br.org.scsi.lenet5.data;
 
 public interface IMatrix<T extends IMatrix<T>> {
-
 	T newInstance(int width, int height);
 
 	float get(int i);
@@ -30,7 +29,7 @@ public interface IMatrix<T extends IMatrix<T>> {
 		}
 		final T fm = newInstance(getWidth(), getHeight());
 		for (int i = 0; i < getLength(); i++) {
-			set(i, get(i) + other.get(i));
+			fm.set(i, get(i) + other.get(i));
 
 		}
 		return fm;
@@ -42,26 +41,58 @@ public interface IMatrix<T extends IMatrix<T>> {
 		}
 		final T fm = newInstance(getWidth(), getHeight());
 		for (int i = 0; i < getLength(); i++) {
-			set(i, get(i) - other.get(i));
+			fm.set(i, get(i) - other.get(i));
 
 		}
 		return fm;
 	}
 
-	T multiply(T other);
+	default T multiply(T otherMatrix) {
 
-	T multiply(float scalar);
+		if (this.getWidth() != otherMatrix.getHeight()) {
+			throw new IllegalArgumentException("Dimensões incompatíveis para multiplicação de matrizes.");
+		}
+		final T result = newInstance(this.getHeight(), otherMatrix.getWidth());
 
-	T transpose();
+		for (int i = 0; i < this.getHeight(); i++) {
+			for (int j = 0; j < otherMatrix.getWidth(); j++) {
+				for (int k = 0; k < this.getWidth(); k++) {
+					result.set(i, j, result.get(i, j) + this.get(i, k) * otherMatrix.get(k, j));
+				}
+			}
+		}
 
-	int getRows();
+		return result;
+	}
 
-	int getCols();
+	default T multiply(float scalar) {
+		final T result = newInstance(this.getHeight(), this.getWidth());
+		for (int i = 0; i < this.getHeight(); i++) {
+			for (int k = 0; k < this.getWidth(); k++) {
+				result.set(i, k, result.get(i, k) + this.get(i, k) * scalar);
+			}
+		}
+		return result;
+	}
+
+	default T transpose() {
+		final T result = newInstance(this.getHeight(), this.getWidth());
+		for (int i = 0; i < this.getHeight(); i++) {
+			for (int j = 0; j < this.getWidth(); j++) {
+				result.set(j, i, this.get(i, j));
+			}
+		}
+		return result;
+	}
 
 	int getWidth();
 
-	int getLength();
-
 	int getHeight();
+
+	default int getLength() {
+		return getWidth() * getHeight();
+	}
+
+	T copy();
 
 }
